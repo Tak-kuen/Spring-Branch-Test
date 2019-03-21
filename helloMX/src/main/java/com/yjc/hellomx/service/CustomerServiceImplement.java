@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CustomerServiceImplement implements CustomerService{
 	//테이블 상관없이 쓰일 모든 쿼리를 담은 매퍼함수들을 등록시킨다.
-//	private CustomerMapper mapper;
+	private CustomerMapper mapper;
 	
 	@Override
 	public ArrayList<CustomerVO> getList() {
@@ -28,6 +28,12 @@ public class CustomerServiceImplement implements CustomerService{
 	public int delete(String name) {
 //		return mapper.delete(name);
 		return 0;
+	}
+
+	@Override
+	public CustomerVO get(String cid) {
+		
+		return mapper.get(cid);
 	}
 
 }
