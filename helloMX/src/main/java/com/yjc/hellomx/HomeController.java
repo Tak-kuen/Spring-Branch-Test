@@ -59,9 +59,11 @@ public class HomeController {
 	public String membership(Model model) {
 		return "membership";
 	}
-	@RequestMapping(value = "/customer/{cid}", method = RequestMethod.GET) // value 가 url pattern, method는 get아니면 post
+	@RequestMapping(value = "/customer/{cid}", method = RequestMethod.GET)
+	// value 가 url pattern, method는 get아니면 post
 	public String getCustomer(@PathVariable String cid,Model model) {
 		model.addAttribute("customer",customerService.get(cid));
+		System.out.println(customerService.get(cid));
 		return "customer::customerInfo";
 	}
 //	public String insertAnno(CustomerAnnoTest dto,Model model) {

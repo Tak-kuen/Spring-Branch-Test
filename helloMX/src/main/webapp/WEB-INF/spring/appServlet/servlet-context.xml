@@ -28,30 +28,24 @@
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
+		<beans:property name="characterEncoding" value="UTF-8" />
+    	<beans:property name="templateMode" value="HTML5" />
 	</beans:bean>
 
 	<beans:bean id="templateEngine"
 		class="org.thymeleaf.spring5.SpringTemplateEngine">
-		<beans:property name="templateResolver"
-			ref="templateResolver" />
-		<beans:property name="enableSpringELCompiler"
-			value="true" />
+		<beans:property name="templateResolver" ref="templateResolver" />
+		<beans:property name="enableSpringELCompiler" value="true" />
 		<beans:property name="additionalDialects">
 			<beans:set>
 				<beans:bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
 			</beans:set>
 		</beans:property>
 	</beans:bean>
-	<beans:bean
-		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
-		<beans:property name="templateEngine"
-			ref="templateEngine" />
-	</beans:bean>
-	<beans:bean
-		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<beans:property name="templateEngine" ref="templateEngine" />
 		<beans:property name="characterEncoding" value="UTF-8" />
-		<beans:property name="templateEngine"
-			ref="templateEngine" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8" />
 	</beans:bean>
 	<context:component-scan
 		base-package="com.yjc.hellomx" /> <!-- 패키지 딴곳에쓰고싶을때 이름바꿈 -->
