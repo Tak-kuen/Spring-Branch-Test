@@ -23,6 +23,7 @@
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
 		<beans:property name="prefix" value="/WEB-INF/views/" /> 뷰위치 <beans:property 
 		name="suffix" value=".jsp" /> </beans:bean> -->
+
 	<beans:bean id="templateResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -30,8 +31,9 @@
 		<beans:property name="cacheable" value="false"></beans:property>
 		<beans:property name="characterEncoding" value="UTF-8"></beans:property>
 	</beans:bean>
-	
-	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+
+	<beans:bean id="templateEngine"
+		class="org.thymeleaf.spring5.SpringTemplateEngine">
 		<beans:property name="templateResolver" ref="templateResolver" />
 		<beans:property name="enableSpringELCompiler" value="true" />
 		<beans:property name="additionalDialects">
@@ -53,8 +55,6 @@
 		<beans:bean id="commonInterceptor"
 			class="com.yjc.hellomx.interceptor.CommonInterceptor" />
 	</interceptor>
-</interceptors>
-
-
+  </interceptors>
 
 </beans:beans>

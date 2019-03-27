@@ -14,4 +14,5 @@ public interface CustomerMapper {
 	public CustomerVO get(String cid);
 	public CustomerVO login(@Param("cid") String cid,@Param("password") String password);
 	
+
 }

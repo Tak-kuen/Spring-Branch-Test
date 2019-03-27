@@ -61,6 +61,7 @@ public class HomeController {
 	public String membership(Model model) {
 		return "membership";
 	}
+
 	@RequestMapping(value= "/customer/{cid}", method=RequestMethod.GET)
 	public String getCustomer(@PathVariable String cid, Model model) {
 		System.out.println(cid);
