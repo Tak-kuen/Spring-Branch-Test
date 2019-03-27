@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 	
 	
-//	private CustomerService customerService;
+	private CustomerService customerService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -35,7 +36,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );	//request.setAttribute와 같은 것
-//		model.addAttribute("list",customerService.getList());
+		model.addAttribute("list",customerService.getList());
 		return "home";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST) // value 가 url pattern, method는 get아니면 post
@@ -57,6 +58,11 @@ public class HomeController {
 	@RequestMapping(value = "/membership", method = RequestMethod.GET) // value 가 url pattern, method는 get아니면 post
 	public String membership(Model model) {
 		return "membership";
+	}
+	@RequestMapping(value= "/customer/{cid}", method=RequestMethod.GET)
+	public String getCustomer(@PathVariable String cid, Model model) {
+		model.addAttribute("customer",customerService.get(cid));
+		return "customer::customerInfo";
 	}
 //	public String insertAnno(CustomerAnnoTest dto,Model model) {
 //		Date date = new Date();
