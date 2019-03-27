@@ -19,6 +19,6 @@
 	select * from customer where cid = #{cid} and password =#{password}
 </select>
 <select id="get" resultType="com.yjc.hellomx.domain.CustomerVO">
-	select * from customer where cid= ${cid}
+	select * from customer where cid= #{cid}
 </select>
 </mapper>

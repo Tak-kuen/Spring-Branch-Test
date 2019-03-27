@@ -63,6 +63,7 @@ public class HomeController {
 	}
 	@RequestMapping(value= "/customer/{cid}", method=RequestMethod.GET)
 	public String getCustomer(@PathVariable String cid, Model model) {
+		System.out.println(cid);
 		model.addAttribute("customer",customerService.get(cid));
 		return "customer::customerInfo";
 	}
