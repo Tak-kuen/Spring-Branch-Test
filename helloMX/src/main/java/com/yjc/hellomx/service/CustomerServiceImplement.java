@@ -14,8 +14,8 @@ public class CustomerServiceImplement implements CustomerService{
 	
 	@Override
 	public ArrayList<CustomerVO> getList() {
-//		return mapper.getList();
-		return null;
+		return mapper.getList();
+//		return null;
 	}
 
 	@Override
@@ -31,8 +31,12 @@ public class CustomerServiceImplement implements CustomerService{
 	}
 
 	@Override
+	public CustomerVO login(String cid, String password) {
+		return mapper.login(cid, password);
+	}
+
+	@Override
 	public CustomerVO get(String cid) {
-		
 		return mapper.get(cid);
 	}
 

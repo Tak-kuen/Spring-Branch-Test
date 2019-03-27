@@ -4,12 +4,17 @@
 <body th:fragment="body">
 	<div id="title">
 		<img src="/resources/img/ryzen.png">
+		<h1>dev-stk2 test</h1>
 		<nav>
 			<ul class="nav_list">
 				<li class="nav_item"><a href="/">HOME</a></li>
 				<li class="nav_item"><a href="/info">INFO.</a></li>
 				<li class="nav_item"><a href="/menu">MENU</a></li>
 				<li class="nav_item"><a href="/membership">MEMBERSHIP</a></li>
+				<li class="nav_item" th:if="${session.user==null}"><a href="/login">Login</a></li>
+				<li class="nav_item" th:if="${session.user}">
+					<span th:text="${session.user.name}"></span><a href="/logout">Logout</a>
+				</li>
 			</ul>
 		</nav>
 	</div>

@@ -8,5 +8,6 @@ public interface CustomerService {
 	public ArrayList<CustomerVO> getList();
 	public int insertList(CustomerVO dto);
 	public int delete(String name);
+	public CustomerVO login(String cid, String password);
 	public CustomerVO get(String cid);
 }

@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +38,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );	//request.setAttribute와 같은 것
-//		model.addAttribute("list",customerService.getList());
+		model.addAttribute("list",customerService.getList());
 		return "home";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST) // value 가 url pattern, method는 get아니면 post
@@ -59,13 +61,37 @@ public class HomeController {
 	public String membership(Model model) {
 		return "membership";
 	}
-	@RequestMapping(value = "/customer/{cid}", method = RequestMethod.GET)
-	// value 가 url pattern, method는 get아니면 post
-	public String getCustomer(@PathVariable String cid,Model model) {
+
+	@RequestMapping(value= "/customer/{cid}", method=RequestMethod.GET)
+	public String getCustomer(@PathVariable String cid, Model model) {
+		System.out.println(cid);
 		model.addAttribute("customer",customerService.get(cid));
-		System.out.println(customerService.get(cid));
 		return "customer::customerInfo";
 	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm() {
+		return "loginForm";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(CustomerVO userInfo, HttpSession session, Model model) {
+		CustomerVO user = customerService.login(userInfo.getCid(), userInfo.getPassword());
+		if (user != null) {
+			session.setAttribute("user", user);
+			return "home";
+		} else {
+			model.addAttribute("error", "login failed");
+			return "loginForm";
+		}
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String loginForm(HttpSession session) {
+		session.invalidate();
+		return "home";
+	}
+	
 //	public String insertAnno(CustomerAnnoTest dto,Model model) {
 //		Date date = new Date();
 //		dto.setBirthday(date);
