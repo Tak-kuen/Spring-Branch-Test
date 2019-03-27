@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +66,30 @@ public class HomeController {
 		model.addAttribute("customer",customerService.get(cid));
 		return "customer::customerInfo";
 	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm() {
+		return "loginForm";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(CustomerVO userInfo, HttpSession session, Model model) {
+		CustomerVO user = customerService.login(userInfo.getCid(), userInfo.getPassword());
+		if (user != null) {
+			session.setAttribute("user", user);
+			return "home";
+		} else {
+			model.addAttribute("error", "login failed");
+			return "loginForm";
+		}
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String loginForm(HttpSession session) {
+		session.invalidate();
+		return "home";
+	}
+	
 //	public String insertAnno(CustomerAnnoTest dto,Model model) {
 //		Date date = new Date();
 //		dto.setBirthday(date);

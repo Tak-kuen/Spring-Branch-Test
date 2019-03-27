@@ -9,6 +9,24 @@
 <!-- page_lib와 page_css 는 위와 같이 추가하여 사용-->
 <th:block layout:fragment="contents">
 	<h1>MEMBERSHIP!</h1>
+	<input type="text" name="cid" id="cid"/><button id="search">Search</button>
+	<div id="result"></div>
 </th:block>
 <!-- page_js 필요하면 추가 -->
+<script>
+	$(function() {
+		$('#search').click(function() {
+			var path='/customer/' + $('#cid').val();
+			console.log(path);
+			$.ajax({
+				type:'GET',
+				url:path,
+				success:function(data) {
+					console.log(data);
+					$('#result').replaceWith(data);
+				}
+			});
+		});
+	});
+</script>
 </html>
